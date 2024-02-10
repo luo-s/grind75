@@ -8,6 +8,8 @@ may not use the same element twice.
 You can return the answer in any order.
 */
 
+// https://leetcode.com/problems/two-sum/description/
+
 // I cannot use the same element twice, so I need to keep track of the
 // elements I have already used. I can use a hash table.
 var twoSum = function (nums, target) {
