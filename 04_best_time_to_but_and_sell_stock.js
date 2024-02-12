@@ -9,4 +9,16 @@ Return the maximum profit you can achieve from this transaction.
 If you cannot achieve any profit, return 0.
 */
 
-var maxProfit = function (prices) {};
+// brute force
+// time complexity O(n^2)
+// space complexity O(1)
+var maxProfit = function (prices) {
+  let maxProfit = 0;
+  for (let i = 0; i < prices.length - 1; i++) {
+    for (let j = i + 1; j < prices.length; j++) {
+      let profit = prices[j] - prices[i];
+      maxProfit = Math.max(maxProfit, profit);
+    }
+  }
+  return maxProfit;
+};
