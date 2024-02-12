@@ -22,3 +22,18 @@ var maxProfit = function (prices) {
   }
   return maxProfit;
 };
+
+// time complexity O(n)
+// space complexity O(1)
+var maxProfit = function (prices) {
+  let maxProfit = 0;
+  let minPrice = prices[0];
+  // loop through the array
+  for (let i = 1; i < prices.length; i++) {
+    // update the minPrice
+    min = Math.min(minPrice, prices[i]);
+    // update the maxProfit
+    maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+  }
+  return maxProfit;
+};
