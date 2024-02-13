@@ -9,6 +9,8 @@ Return the maximum profit you can achieve from this transaction.
 If you cannot achieve any profit, return 0.
 */
 
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
 // brute force
 // time complexity O(n^2)
 // space complexity O(1)

@@ -18,6 +18,8 @@ Both list1 and list2 are sorted in non-decreasing order.
  * 
 */
 
+// https://leetcode.com/problems/merge-two-sorted-lists/description/
+
 var mergeTwoLists = function (list1, list2) {
   let dummy = new ListNode();
   let current = dummy;
