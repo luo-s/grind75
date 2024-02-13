@@ -26,3 +26,17 @@ var search = function(nums, target) {
     }
     return -1;
 };
+
+var search = function(nums, target) {
+    let left = 0, right = nums.length - 1;
+    while (left < right) {  // exit when left === right
+        let mid = left + Math.floor((right - left) / 2); // lower mid
+        if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return nums[left] === target ? left : -1;
+}
+
