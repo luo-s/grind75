@@ -14,8 +14,8 @@ You must write an algorithm with O(log n) runtime complexity.
 
 var search = function(nums, target) {
     let left = 0, right = nums.length - 1;
-    while (left <= right) {
-        let mid = Math.floor((left + right) / 2);
+    while (left <= right) { // exit when left > right
+        let mid = Math.floor((left + right) / 2);   // doesn't matter if it's lower or upper mid
         if (nums[mid] > target) {
             right = mid - 1;
         } else if (nums[mid] < target) {
@@ -40,3 +40,15 @@ var search = function(nums, target) {
     return nums[left] === target ? left : -1;
 }
 
+var search = function(nums, target) {
+    let left = 0, right = nums.length - 1;
+    while (left < right) {  // exit when left === right
+        let mid = left + Math.floor(right - left + 1 / 2); // upper mid
+        if (nums[mid] > target) {
+            right = mid - 1;
+        } else {
+            left = mid;
+        }
+    }
+    return nums[left] === target ? left : -1;
+}
