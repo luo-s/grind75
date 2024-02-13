@@ -8,6 +8,8 @@ Alphanumeric characters include letters and numbers.
 Given a string s, return true if it is a palindrome, or false otherwise.
 */
 
+// https://leetcode.com/problems/valid-palindrome/description/
+
 // two pointers + regex
 var isPalindrome = function (s) {
   // remove non-alphanumeric characters and convert to lowercase
