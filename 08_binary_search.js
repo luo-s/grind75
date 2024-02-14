@@ -1,5 +1,6 @@
 /*
-Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. 
+Given an array of integers nums which is sorted in ascending order, and an 
+integer target, write a function to search target in nums. 
 If target exists, then return its index. Otherwise, return -1.
 
 1 <= nums.length <= 10^4
@@ -12,43 +13,49 @@ You must write an algorithm with O(log n) runtime complexity.
 
 // https://leetcode.com/problems/binary-search/description/
 
-var search = function(nums, target) {
-    let left = 0, right = nums.length - 1;
-    while (left <= right) { // exit when left > right
-        let mid = Math.floor((left + right) / 2);   // doesn't matter if it's lower or upper mid
-        if (nums[mid] > target) {
-            right = mid - 1;
-        } else if (nums[mid] < target) {
-            left = mid + 1;
-        } else {
-            return mid;
-        }
+var search = function (nums, target) {
+  let left = 0,
+    right = nums.length - 1;
+  while (left <= right) {
+    // exit when left > right
+    let mid = Math.floor((left + right) / 2); // doesn't matter if it's lower or upper mid
+    if (nums[mid] > target) {
+      right = mid - 1;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      return mid;
     }
-    return -1;
+  }
+  return -1;
 };
 
-var search = function(nums, target) {
-    let left = 0, right = nums.length - 1;
-    while (left < right) {  // exit when left === right
-        let mid = left + Math.floor((right - left) / 2); // lower mid
-        if (nums[mid] < target) {
-            left = mid + 1;
-        } else {
-            right = mid;
-        }
+var search = function (nums, target) {
+  let left = 0,
+    right = nums.length - 1;
+  while (left < right) {
+    // exit when left === right
+    let mid = left + Math.floor((right - left) / 2); // lower mid
+    if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid;
     }
-    return nums[left] === target ? left : -1;
-}
+  }
+  return nums[left] === target ? left : -1;
+};
 
-var search = function(nums, target) {
-    let left = 0, right = nums.length - 1;
-    while (left < right) {  // exit when left === right
-        let mid = left + Math.floor(right - left + 1 / 2); // upper mid
-        if (nums[mid] > target) {
-            right = mid - 1;
-        } else {
-            left = mid;
-        }
+var search = function (nums, target) {
+  let left = 0,
+    right = nums.length - 1;
+  while (left < right) {
+    // exit when left === right
+    let mid = left + Math.floor(right - left + 1 / 2); // upper mid
+    if (nums[mid] > target) {
+      right = mid - 1;
+    } else {
+      left = mid;
     }
-    return nums[left] === target ? left : -1;
-}
+  }
+  return nums[left] === target ? left : -1;
+};
