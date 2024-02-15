@@ -16,4 +16,27 @@ Return the modified image after performing the flood fill.
 
 // https://leetcode.com/problems/flood-fill/
 
-var floodFill = function (image, sr, sc, color) {};
+// depth first search
+var floodFill = function (image, sr, sc, color) {
+  let m = image.length,
+    n = image[0].length,
+    startColor = image[sr][sc];
+  var fill = function (r, c) {
+    if (r < 0 || r >= m || c < 0 || c >= n || image[r][c] !== startColor)
+      return;
+    image[r][c] = color;
+    fill(r - 1, c);
+    fill(r + 1, c);
+    fill(r, c - 1);
+    fill(r, c + 1);
+  };
+  if (startColor !== color) fill(sr, sc);
+  return image;
+};
+
+// breadth first search
+var floodFill = function (image, sr, sc, color) {
+  let m = image.length,
+    n = image[0].length,
+    startColor = image[sr][sc];
+};
