@@ -16,7 +16,7 @@ Return the modified image after performing the flood fill.
 
 // https://leetcode.com/problems/flood-fill/
 
-// depth first search
+// depth first search + stack (call stack)
 var floodFill = function (image, sr, sc, color) {
   let m = image.length,
     n = image[0].length,
@@ -34,7 +34,7 @@ var floodFill = function (image, sr, sc, color) {
   return image;
 };
 
-// breadth first search
+// breadth first search + queue
 var floodFill = function (image, sr, sc, color) {
   let m = image.length,
     n = image[0].length,
