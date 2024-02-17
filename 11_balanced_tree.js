@@ -37,9 +37,11 @@ var isBalanced = function(root) {
         return Math.max(left, right) + 1;
     }
     return height(root) !== -1;
+    /*
     // If the tree is empty, we can say it’s balanced...
     if (root == null)  return true;
     // if the height of the tree is -1, it’s unbalanced
 	if (height(root) == -1)  return false;
 	return true;
+    */
 }
