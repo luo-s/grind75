@@ -6,6 +6,13 @@ There is a cycle in a linked list if there is some node in the list that can be 
 Return true if there is a cycle in the linked list. Otherwise, return false.
 */
 
+// fast and slow pointers
 var hasCycle = function(head) {
-    
+    let fast = head, slow = head;
+    while (fast && fast.next) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if (fast === slow) return true;
+    }
+    return false;
 };
