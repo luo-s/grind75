@@ -16,12 +16,12 @@ var solution = function(isBadVersion) {
      * @return {integer} The first bad version
      */
     return function(n) {
-        let left = 1, right = n + 1;
-        while (left < right) {  // binary search [left, right); loop ends when left === right
+        let left = 1, right = n;
+        while (left < right) {  // binary search [left, right]; loop ends when left === right
             let mid = left + Math.floor((right - left) / 2); // lower mid
-            if (isBadVersion(mid)) {    // if mid is bad, [mid, right) are all bad
+            if (isBadVersion(mid)) {    // if mid is bad, [mid, right] are all bad, first bad is in [left, mid]
                 right = mid;
-            } else {    // if mid is good, [left, mid] are all good, first bad is in [mid + 1, right)
+            } else {    // if mid is good, [left, mid] are all good, first bad is in [mid + 1, right]
                 left = mid + 1;
             }
         }
