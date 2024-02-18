@@ -7,4 +7,5 @@ In how many distinct ways can you climb to the top?
 
 // https://leetcode.com/problems/climbing-stairs/
 
+// recursive solution
 var climbStairs = function (n) {};
