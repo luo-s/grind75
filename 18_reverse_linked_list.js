@@ -42,8 +42,8 @@ var reverseList = function (head) {
 var reverseList = function (head) {
   if (!head || !head.next) return head;
   // need a null node for the new tail
-  let prev = null;
-  let curr = head;
+  let prev = null,
+    curr = head;
   // reverse the linked list in place
   while (curr) {
     // save the next node
@@ -56,4 +56,29 @@ var reverseList = function (head) {
   }
   // prev is the new head
   return prev;
+};
+
+// reverse in place using destructuring swap (ES6 feature)
+var reverseList = function (head) {
+  let prev = null,
+    curr = head;
+  while (curr) {
+    // swap -- need to update curr.next before updating curr
+    [curr.next, prev, curr] = [prev, curr, curr.next];
+  }
+  return prev;
+};
+
+// recursive solution
+var reverseList = function (head) {
+  // base case -- if the linked list is empty or has only one node
+  if (!head || !head.next) return head;
+  // recursively reverse the rest of the linked list
+  let newHead = reverseList(head.next);
+  //  reverse the link of the current node
+  head.next.next = head;
+  // make thte head the new tail
+  head.next = null;
+  // return the new head
+  return newHead;
 };
