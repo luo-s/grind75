@@ -14,17 +14,14 @@ s consists of lowercase and/or uppercase English letters only.
 // hash map solution
 var longestPalindrome = function (s) {
   let max = 0;
-  // construct a dictionary of the characters in the string
   let map = new Map();
   for (let char of s) {
     map.set(char, (map.get(char) || 0) + 1);
   }
-  // iterate through the dictionary and add the number of pairs of characters
-  for (let [key, value] of map.entries()) {
+  for (let value of map.values()) {
     max += Math.floor(value / 2) * 2;
   }
-  // if there are any characters left, add one to the max (the middle of the palindrome)
-  for (let [key, value] of map.entries()) {
+  for (let value of map.values()) {
     if (value % 2 === 1) {
       max++;
       break;
