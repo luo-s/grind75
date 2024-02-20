@@ -10,21 +10,25 @@ You are given an API bool isBadVersion(version) which returns whether version is
 
 // binary search
 // time compleixty O(logn)
-var solution = function(isBadVersion) {
-    /**
-     * @param {integer} n Total versions
-     * @return {integer} The first bad version
-     */
-    return function(n) {
-        let left = 1, right = n;
-        while (left < right) {  // binary search [left, right]; loop ends when left === right
-            let mid = left + Math.floor((right - left) / 2); // lower mid
-            if (isBadVersion(mid)) {    // if mid is bad, [mid, right] are all bad, first bad is in [left, mid]
-                right = mid;
-            } else {    // if mid is good, [left, mid] are all good, first bad is in [mid + 1, right]
-                left = mid + 1;
-            }
-        }
-        return left;
-    };
+var solution = function (isBadVersion) {
+  /**
+   * @param {integer} n Total versions
+   * @return {integer} The first bad version
+   */
+  return function (n) {
+    let left = 1,
+      right = n;
+    while (left < right) {
+      // binary search [left, right]; loop ends when left === right
+      let mid = left + Math.floor((right - left) / 2); // lower mid
+      if (isBadVersion(mid)) {
+        // if mid is bad, [mid, right] are all bad, first bad is in [left, mid]
+        right = mid;
+      } else {
+        // if mid is good, [left, mid] are all good, first bad is in [mid + 1, right]
+        left = mid + 1;
+      }
+    }
+    return left;
+  };
 };
