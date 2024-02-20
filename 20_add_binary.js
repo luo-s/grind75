@@ -7,6 +7,7 @@ Each string does not contain leading zeros except for the zero itself.
 */
 
 // https://leetcode.com/problems/add-binary/
+// related https://leetcode.com/problems/add-to-array-form-of-integer/description/
 
 // brute force
 // time complexity: O(n^2) (unshift operation is O(n))
