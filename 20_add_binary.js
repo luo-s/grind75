@@ -29,3 +29,21 @@ var addBinary = function (a, b) {
   if (carry) ans.unshift(1);
   return ans.join("");
 };
+
+// constant space
+// time complexity: O(n)
+// space complexity: O(1)
+var addBinary = function (a, b) {
+  let ans = "",
+    carry = 0;
+  let i = a.length - 1,
+    j = b.length - 1;
+  while (i >= 0 || j >= 0 || carry > 0) {
+    let sum = carry;
+    if (i >= 0) sum += parseInt(a[i--]);
+    if (j >= 0) sum += parseInt(b[j--]);
+    ans = (sum % 2) + ans;
+    carry = Math.floor(sum / 2);
+  }
+  return ans;
+};
