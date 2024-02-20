@@ -21,3 +21,24 @@ var majorityElement = function (nums) {
     if (value > nums.length / 2) return key;
   }
 };
+
+// sorting
+// time complexity O(nlogn)
+// space complexity O(1)
+var majorityElement = function (nums) {
+  nums.sort((a, b) => a - b);
+  return nums[Math.floor(nums.length / 2)];
+};
+
+// Boyer-Moore Voting Algorithm
+// time complexity O(n)
+// space complexity O(1)
+var majorityElement = function (nums) {
+  let count = 0;
+  let candidate = null;
+  for (let num of nums) {
+    if (count === 0) candidate = num;
+    count += num === candidate ? 1 : -1;
+  }
+  return candidate;
+};
