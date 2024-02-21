@@ -46,6 +46,7 @@ var insert = function (intervals, newInterval) {
       end = Math.max(end, currEnd);
     }
   }
+  // handle the case where the new interval is the last interval
   if (!pushed) result.push([start, end]);
   return result;
 };
