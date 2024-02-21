@@ -20,4 +20,32 @@ newInterval.length == 2
 0 <= start <= end <= 10^5
 */
 
-var insert = function (intervals, newInterval) {};
+// time complexity: O(n)
+// space complexity: O(n)
+var insert = function (intervals, newInterval) {
+  let result = [];
+  let [start, end] = newInterval;
+  let pushed = false;
+  // loop through the intervals
+  for (let [currStart, currEnd] of intervals) {
+    // if the current interval is less than the new interval
+    if (start > currEnd) {
+      result.push([currStart, currEnd]);
+      // if the new interval is less than the current interval
+    } else if (end < currStart) {
+      result.push([start, end]);
+      // push the current interval after the new interval (only once)
+      if (!pushed) {
+        result.push([currStart, currEnd]);
+        pushed = true;
+      }
+      start = Infinity;
+    } else {
+      // merge the intervals
+      start = Math.min(start, currStart);
+      end = Math.max(end, currEnd);
+    }
+  }
+  if (!pushed) result.push([start, end]);
+  return result;
+};
