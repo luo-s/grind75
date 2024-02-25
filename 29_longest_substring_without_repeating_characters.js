@@ -30,3 +30,29 @@ var lengthOfLongestSubstring = function (s) {
   }
   return max;
 };
+
+// sliding window
+// time complexity: O(n) worst case O(n^2)
+// space complexity: O(n)
+var lengthOfLongestSubstring = function (s) {
+  let left = 0,
+    right = 0,
+    max = 0,
+    map = new Map();
+  while (right < s.length) {
+    // if no repeating characters
+    if (!map.has(s[right])) {
+      map.set(s[right], right);
+      max = Math.max(max, map.size);
+    } else {
+      // if repeating characters
+      while (left <= map.get(s[right])) {
+        map.delete(s[left]);
+        left++;
+      }
+      map.set(s[right], right);
+    }
+    right++;
+  }
+  return max;
+};
