@@ -32,7 +32,7 @@ var lengthOfLongestSubstring = function (s) {
 };
 
 // sliding window
-// time complexity: O(n) worst case O(n^2)
+// time complexity: O(n)
 // space complexity: O(n)
 var lengthOfLongestSubstring = function (s) {
   let left = 0,
@@ -53,6 +53,29 @@ var lengthOfLongestSubstring = function (s) {
       map.set(s[right], right);
     }
     right++;
+  }
+  return max;
+};
+
+// optimized sliding window
+// time complexity O(n)
+// space complexity O(n)
+var lengthOfLongestSubstring = function (s) {
+  const chars = new Set();
+  let left = 0;
+  let right = 0;
+  let max = 0;
+  while (right < s.length) {
+    // if no repeating characters
+    if (!chars.has(s[right])) {
+      chars.add(s[right]);
+      right++;
+      max = Math.max(max, chars.size);
+    } else {
+      // if repeating characters
+      chars.delete(s[left]);
+      left++;
+    }
   }
   return max;
 };
