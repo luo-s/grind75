@@ -24,6 +24,8 @@ var kClosest = function (points, k) {
 };
 
 // quick select
+// time complexity: O(n); worst case O(n^2)
+// space complexity: O(k)
 var kClosest = function (points, k) {
   let res = [];
   var distance = (point) => point[0] ** 2 + point[1] ** 2;
@@ -57,72 +59,39 @@ var kClosest = function (points, k) {
   return res;
 };
 
-// // quick select
-// // time complexity: O(n); worst case O(n^2)
-// var kClosest = function (points, k) {
-//   // the algorithm runs from index to index
-//   quickSelect(points, 0, points.length - 1, k);
-
-//   return points.slice(0, k);
-// };
-
-// function quickSelect(arr, min, max, k) {
-//   if (min >= max) return;
-//   // Exits recursion when min and max have met after many iterations.
-//   // Not 100% necessary as the function will end when k = leftLength.
-//   // But it does save one iteration at the end and it's good practice to always have a basecase for your recursive functions
-
-//   const rPivot = Math.floor(Math.random() * (max - min + 1)) + min;
-//   [arr[rPivot], arr[max]] = [arr[max], arr[rPivot]];
-//   // Get random index and swap it with the last item in the array because we use the last item as our pivot point when partitioning
-
-//   const mid = partition(arr, min, max);
-//   // pass pivot index (which is max now because of the swap)
-
-//   const leftLength = mid - min + 1;
-//   // the length of the left partition aka the amount of points we have that are less than the pivot
-
-//   if (k < leftLength) quickSelect(arr, min, mid - 1, k);
-//   // we have too many points in our left partition.
-//   // since it isn't actually fully sorted (the elements in there are just less than the pivot),
-//   // we run the function again but shrink our max boundary to the element left of the pivot
-
-//   if (k > leftLength) quickSelect(arr, mid + 1, max, k - leftLength);
-//   // we don't have enough points in our left partition.
-//   // we run the function again but move our starting boundary to the element right of the pivot
-//   // we reduce our k because we already know the n-th smallest-k points in leftLength. We just need k - leftLength more points to get the total being asked for.
-
-//   // function stops running when k = leftLength
-// }
-
-// // Function to split the array down the pivot that was passed in as max.
-// // At the end of the function, it will place the pivot in the correct location (ie. items to the left of it will be less and to the right will be greater)
-// // and return its index.
-// function partition(arr, min, max) {
-//   const pivot = max; // use last item as pivot, but it's actually randomized before it's passed to this function
-//   let i = min; // iterates through array
-//   let j = min; // keeps track of items larger than pivot
-
-//   for (; i < pivot; i++) {
-//     // stop loop before the pivot
-//     if (dist(arr[i]) <= dist(arr[pivot])) {
-//       // using = keeps dupes close to original pivot (eg. if we just used < then dupes would be ignored)
-//       [arr[i], arr[j]] = [arr[j], arr[i]];
-//       // Assuming i is ahead of j when iterating through the array,
-//       // And j is an element greater than the pivot,
-//       // When we find an element i that is less than the pivot, we want to swap it so that the lesser value goes behind the pivot and the greater value ahead of the pivot
-
-//       j++; // increment j to another value that is greater than the pivot
-//     }
-//   }
-
-//   [arr[pivot], arr[j]] = [arr[j], arr[pivot]]; // puts pivot value in correct place where elements to the left are less and elements to the right are greater
-//   return j; // return the index of the pivot
-// }
-
-// // Function to get the distance of a point. We can simplify the original distance formula to this because:
-// // 1. We can omit the subtractions because the origin is at 0, 0
-// // 2. We can omit the sqrt because we don't need the actual distance value. This is enough to get us something to use for comparisons.
-// function dist(point) {
-//   return point[0] * point[0] + point[1] * point[1];
-// }
+// optimized quick select
+// time complexity: O(n); worst case O(n^2)
+var kClosest = function (points, k) {
+  // define the distance function
+  var dist = (point) => point[0] ** 2 + point[1] ** 2;
+  var partition = (arr, left, right) => {
+    const pivot = right;
+    let pointer = left;
+    for (let i = left; i < pivot; i++) {
+      if (dist(arr[i]) <= dist(arr[pivot])) {
+        [arr[i], arr[pointer]] = [arr[pointer], arr[i]];
+        pointer++;
+      }
+    }
+    // swap pivot to the correct position
+    [arr[pivot], arr[pointer]] = [arr[pointer], arr[pivot]];
+    return pointer; // return the index of the pivot
+  };
+  var quickSelect = (arr, left, right, k) => {
+    // randomize pivot and swap to the end/right
+    const rPivot = Math.floor(Math.random() * (right - left + 1)) + left;
+    [arr[rPivot], arr[right]] = [arr[right], arr[rPivot]];
+    // partition the array and get the index of the pivot
+    const mid = partition(arr, left, right);
+    const leftLength = mid - left + 1;
+    // all k closest points are on the left, further sort left partition
+    if (k < leftLength) quickSelect(arr, left, mid - 1, k);
+    // left partition is good, further sort right partition
+    if (k > leftLength) quickSelect(arr, mid + 1, right, k - leftLength);
+    // if k === leftLength, no need to further sort
+  };
+  // run quickSelect algorithm, which will sort the first k elements
+  quickSelect(points, 0, points.length - 1, k);
+  // return the first k elements of the array
+  return points.slice(0, k);
+};
