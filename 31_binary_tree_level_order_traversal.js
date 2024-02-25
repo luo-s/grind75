@@ -14,9 +14,25 @@ var levelOrder = function (root) {
     if (node === null) return;
     if (result[level] === undefined) result[level] = [];
     result[level].push(node.val);
-    if (node.left) bfs(node.left, level + 1, result);
-    if (node.right) bfs(node.right, level + 1, result);
+    bfs(node.left, level + 1, result);
+    bfs(node.right, level + 1, result);
   };
   bfs(root, 0, result);
+  return result;
+};
+
+// depth first search
+var levelOrder = function (root) {
+  // base case
+  if (!root) return [];
+  let result = [];
+  var dfs = function (node, level, result) {
+    if (node === null) return;
+    if (result[level] === undefined) result[level] = [];
+    result[level].push(node.val);
+    dfs(node.left, level + 1, result);
+    dfs(node.right, level + 1, result);
+  };
+  dfs(root, 0, result);
   return result;
 };
