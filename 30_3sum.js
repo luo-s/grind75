@@ -1,6 +1,6 @@
 /*
 Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] 
-such that i != j, i != k, and j != k, and sum == 0.
+such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
 Notice that the solution set must not contain duplicate triplets.
 
@@ -25,10 +25,9 @@ var threeSum = function (nums) {
     let j = i + 1,
       k = nums.length - 1;
     while (j < k) {
-      let sum = nums[i] + nums[j] + nums[k];
-      if (sum < 0) {
+      if (nums[i] + nums[j] + nums[k] < 0) {
         j++;
-      } else if (sum > 0) {
+      } else if (nums[i] + nums[j] + nums[k] > 0) {
         k--;
       } else {
         // triplet found
