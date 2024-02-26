@@ -13,25 +13,18 @@ boolean empty() Returns true if the queue is empty, false otherwise.
 
 // https://leetcode.com/problems/implement-queue-using-stacks/
 
-var MyQueue = function () {};
-
-/**
- * @param {number} x
- * @return {void}
- */
-MyQueue.prototype.push = function (x) {};
-
-/**
- * @return {number}
- */
-MyQueue.prototype.pop = function () {};
-
-/**
- * @return {number}
- */
-MyQueue.prototype.peek = function () {};
-
-/**
- * @return {boolean}
- */
-MyQueue.prototype.empty = function () {};
+var MyQueue = function () {
+  this.queue = [];
+};
+MyQueue.prototype.push = function (x) {
+  this.queue.push(x);
+};
+MyQueue.prototype.pop = function () {
+  return this.queue.shift();
+};
+MyQueue.prototype.peek = function () {
+  return this.queue[0];
+};
+MyQueue.prototype.empty = function () {
+  return this.queue.length === 0;
+};
