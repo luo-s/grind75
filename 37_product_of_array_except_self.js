@@ -12,6 +12,8 @@ division operation.
 -30 <= nums[i] <= 30
 */
 
+// https://leetcode.com/problems/product-of-array-except-self/description/
+
 /* two pointers
 res[i] = (nums[0] * ... * nums[i-1]) * (nums[i+1] * ... * nums[n-1])
        = left                        * right
@@ -30,6 +32,24 @@ var productExceptSelf = function (nums) {
   let res = [];
   for (let i = 0; i < nums.length; i++) {
     res.push(left[i] * right[i]);
+  }
+  return res;
+};
+
+// optimized space complexity
+// time complexity: O(n)
+// space complexity: O(1)
+var productExceptSelf = function (nums) {
+  let res = new Array(nums.length).fill(1);
+  let prefix = 1;
+  for (let i = 1; i < nums.length; i++) {
+    prefix *= nums[i - 1];
+    res[i] *= prefix;
+  }
+  let postfix = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    postfix *= nums[i + 1];
+    res[i] *= postfix;
   }
   return res;
 };
