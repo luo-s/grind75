@@ -17,4 +17,30 @@ All the pairs prerequisites[i] are unique.
 
 // https://leetcode.com/problems/course-schedule/
 
-var canFinish = function (numCourses, prerequisites) {};
+// check cycle in directed graph (Directed Acyclic Graph)
+// brute force -- time limit exceeded
+// time complexity: O(n * m)
+// space complexity: O(n)
+var canFinish = function (numCourses, prerequisites) {
+  var isCyclic = function (course, visited = new Set()) {
+    if (visited.has(course)) return true;
+    if (!map.has(course)) return false;
+    for (let pre of map.get(course)) {
+      visited.add(course);
+      if (isCyclic(pre, visited)) return true;
+      visited.delete(course);
+    }
+  };
+  let map = new Map();
+  for (let [course, pre] of prerequisites) {
+    if (map.has(course)) {
+      map.get(course).push(pre);
+    } else {
+      map.set(course, [pre]);
+    }
+  }
+  for (let [course, pre] of prerequisites) {
+    if (isCyclic(course)) return false;
+  }
+  return true;
+};
