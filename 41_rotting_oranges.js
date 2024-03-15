@@ -41,6 +41,8 @@ var orangesRotting = function (grid) {
   // bfs: 1) update grid, 2) update fresh, 3) update queue
   while (queue.length > 0) {
     let [i, j, time] = queue.shift();
+    // optinal chaining: same as
+    // if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] < 2) continue;
     if (grid?.[i]?.[j] < 2) continue;
     else {
       if (grid?.[i + 1]?.[j] === 1) {
