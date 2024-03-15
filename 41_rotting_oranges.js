@@ -41,24 +41,24 @@ var orangesRotting = function (grid) {
   // bfs: 1) update grid, 2) update fresh, 3) update queue
   while (queue.length > 0) {
     let [i, j, time] = queue.shift();
-    if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] < 2) continue;
+    if (grid?.[i]?.[j] < 2) continue;
     else {
-      if (i + 1 < m && grid[i + 1][j] === 1) {
+      if (grid?.[i + 1]?.[j] === 1) {
         grid[i + 1][j] = 2;
         fresh -= 1;
         queue.push([i + 1, j, time + 1]);
       }
-      if (i - 1 >= 0 && grid[i - 1][j] === 1) {
+      if (grid?.[i - 1]?.[j] === 1) {
         grid[i - 1][j] = 2;
         fresh -= 1;
         queue.push([i - 1, j, time + 1]);
       }
-      if (j + 1 < n && grid[i][j + 1] === 1) {
+      if (grid?.[i]?.[j + 1] === 1) {
         grid[i][j + 1] = 2;
         fresh -= 1;
         queue.push([i, j + 1, time + 1]);
       }
-      if (j - 1 >= 0 && grid[i][j - 1] === 1) {
+      if (grid?.[i]?.[j - 1] === 1) {
         grid[i][j - 1] = 2;
         fresh -= 1;
         queue.push([i, j - 1, time + 1]);
