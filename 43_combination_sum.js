@@ -19,19 +19,22 @@ backtracking
 var combinationSum = function (candidates, target) {
   let result = [],
     path = [];
-  var backtracking = function (candidates) {
+  // sort candidates to avoid duplicate combinations
+  candidates.sort((a, b) => a - b);
+  var backtracking = function (candidates, start) {
     let sum = path.reduce((a, b) => a + b, 0);
     if (sum === target) {
       result.push([...path]);
       return;
     }
     if (sum > target) return;
-    for (let i = 0; i < candidates.length; i++) {
+    // start from start to avoid duplicate combinations
+    for (let i = start; i < candidates.length; i++) {
       path.push(candidates[i]);
-      backtracking(candidates);
+      backtracking(candidates, i);
       path.pop();
     }
   };
-  backtracking(candidates);
+  backtracking(candidates, 0);
   return result;
 };
