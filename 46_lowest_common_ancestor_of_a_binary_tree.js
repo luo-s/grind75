@@ -22,11 +22,12 @@ var lowestCommonAncestor = function (root, p, q) {
   // base case
   if (!root) return null;
   if (root === p || root === q) return root;
-  if (!root.left && !root.right) return null;
   // recursive case
   let left = lowestCommonAncestor(root.left, p, q),
     right = lowestCommonAncestor(root.right, p, q);
-  // if left and right are not null, then root is the LCA
+  // if left and right are both not null, we found p or q in left subtree
+  // and found the other one in right subtree, then root is the LCA
   if (left && right) return root;
+  // otherwise, p and q are in the same subtree, return the non-null one
   return left || right;
 };
