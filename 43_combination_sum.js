@@ -13,4 +13,25 @@ that sum up to target is less than 150 combinations for the given input.
 
 // https://leetcode.com/problems/combination-sum/description/
 
-var combinationSum = function (candidates, target) {};
+/*
+backtracking
+*/
+var combinationSum = function (candidates, target) {
+  let result = [],
+    path = [];
+  var backtracking = function (candidates) {
+    let sum = path.reduce((a, b) => a + b, 0);
+    if (sum === target) {
+      result.push([...path]);
+      return;
+    }
+    if (sum > target) return;
+    for (let i = 0; i < candidates.length; i++) {
+      path.push(candidates[i]);
+      backtracking(candidates);
+      path.pop();
+    }
+  };
+  backtracking(candidates);
+  return result;
+};
