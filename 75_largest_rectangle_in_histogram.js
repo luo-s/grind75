@@ -44,6 +44,43 @@ var largestRectangleArea = function (heights) {
       }
     }
   }
+  console.log(left, right);
+  let maxArea = 0;
+  for (let i = 0; i < heights.length; i++) {
+    maxArea = Math.max(maxArea, heights[i] * (left[i] + right[i] + 1));
+  }
+  return maxArea;
+};
+
+// manage height length to avoid last while loop
+var largestRectangleArea = function (heights) {
+  let left = new Array(heights.length + 1).fill(0),
+    right = new Array(heights.length + 1).fill(0);
+  // calculate the right
+  let stack = [];
+  heights.push(-Infinity);
+  for (let i = 0; i < heights.length; i++) {
+    while (stack.length > 0 && heights[stack[stack.length - 1]] > heights[i]) {
+      let index = stack.pop();
+      right[index] = i - index - 1;
+    }
+    stack.push(i);
+  }
+  // calculate the left
+  stack = [];
+  heights.pop();
+  heights.unshift(-Infinity);
+  for (let i = heights.length - 1; i >= 0; i--) {
+    while (stack.length > 0 && heights[stack[stack.length - 1]] > heights[i]) {
+      let index = stack.pop();
+      left[index] = index - i - 1;
+    }
+    stack.push(i);
+  }
+  // calculate the max area
+  heights.shift();
+  left.shift();
+  right.pop();
   let maxArea = 0;
   for (let i = 0; i < heights.length; i++) {
     maxArea = Math.max(maxArea, heights[i] * (left[i] + right[i] + 1));
