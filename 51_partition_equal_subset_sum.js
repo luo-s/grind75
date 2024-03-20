@@ -48,7 +48,7 @@ var canPartition = function (nums) {
 
 /*
 dynamic programming
-let dp[i][j] = true if there is a subset of elements in nums[0:i] that 
+let dp[i][j] = true if there is a subset of first i elements that 
 has a sum of j.
 dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]]
 */
@@ -60,15 +60,18 @@ var canPartition = function (nums) {
   let dp = new Array(nums.length + 1)
     .fill()
     .map(() => new Array(sum + 1).fill(false));
+  // initialize: always true if sum = 0, for all i (empty subset)
   for (let i = 0; i < nums.length; i++) {
     dp[i][0] = true;
   }
-  for (let i = 0; i < nums.length; i++) {
+  // loop through all elements and sum
+  for (let i = 1; i <= nums.length; i++) {
     for (let j = 1; j <= sum; j++) {
-      if (j < nums[i]) {
-        dp[i + 1][j] = dp[i][j];
+      // index i represents first i elements: nums[0], ..., nums[i-1]
+      if (j >= nums[i - 1]) {
+        dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
       } else {
-        dp[i + 1][j] = dp[i][j] || dp[i][j - nums[i]];
+        dp[i][j] = dp[i - 1][j];
       }
     }
   }
