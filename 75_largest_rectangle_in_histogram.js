@@ -55,12 +55,15 @@ var largestRectangleArea = function (heights) {
 // manage height length to avoid last while loop
 var largestRectangleArea = function (heights) {
   let left = new Array(heights.length + 1).fill(0),
-    right = new Array(heights.length + 1).fill(0);
+    right = new Array(heights.length + 1).fill(0),
+    heightsCopy = [-Infinity, ...heights, -Infinity];
   // calculate the right
   let stack = [];
-  heights.push(-Infinity);
-  for (let i = 0; i < heights.length; i++) {
-    while (stack.length > 0 && heights[stack[stack.length - 1]] > heights[i]) {
+  for (let i = 1; i < heightsCopy.length; i++) {
+    while (
+      stack.length > 0 &&
+      heightsCopy[stack[stack.length - 1]] > heightsCopy[i]
+    ) {
       let index = stack.pop();
       right[index] = i - index - 1;
     }
@@ -68,22 +71,21 @@ var largestRectangleArea = function (heights) {
   }
   // calculate the left
   stack = [];
-  heights.pop();
-  heights.unshift(-Infinity);
-  for (let i = heights.length - 1; i >= 0; i--) {
-    while (stack.length > 0 && heights[stack[stack.length - 1]] > heights[i]) {
+  for (let i = heightsCopy.length - 2; i >= 0; i--) {
+    while (
+      stack.length > 0 &&
+      heightsCopy[stack[stack.length - 1]] > heightsCopy[i]
+    ) {
       let index = stack.pop();
       left[index] = index - i - 1;
     }
     stack.push(i);
   }
   // calculate the max area
-  heights.shift();
-  left.shift();
-  right.pop();
+  // left[i] and right[i] related to heights[i-1]
   let maxArea = 0;
   for (let i = 0; i < heights.length; i++) {
-    maxArea = Math.max(maxArea, heights[i] * (left[i] + right[i] + 1));
+    maxArea = Math.max(maxArea, heights[i] * (left[i + 1] + right[i + 1] + 1));
   }
   return maxArea;
 };
