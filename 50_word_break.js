@@ -38,3 +38,23 @@ var wordBreak = function (s, wordDict) {
   };
   return dfs(s);
 };
+
+/* dynamic programming
+let dp[i] be true if s[0:i] can be segmented into words in wordDict
+dp[i] = dp[j] && wordDict.includes(s[j:i-1]) for all j in [0, i-1]
+*/
+var wordBreak = function (s, wordDict) {
+  let dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
+  // loop through s[0:i]
+  for (let i = 1; i <= s.length; i++) {
+    // divide s[0:i] into two parts: s[0:j] and s[j:i-1]
+    for (let j = 0; j < i; j++) {
+      if (dp[j] && wordDict.includes(s.slice(j, i))) {
+        dp[i] = true;
+        break;
+      }
+    }
+  }
+  return dp[s.length];
+};
