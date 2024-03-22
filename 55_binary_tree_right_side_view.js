@@ -6,4 +6,5 @@ to bottom.
 
 // https://leetcode.com/problems/binary-tree-right-side-view/description/
 
+// find the rightmost node at each level
 var rightSideView = function (root) {};
