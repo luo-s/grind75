@@ -13,4 +13,24 @@ to 2 * 10^9.
 
 // https://leetcode.com/problems/unique-paths/description/
 
-var uniquePaths = function (m, n) {};
+/* dynamic programming 
+let dp[i][j] ge the number of unique paths to reach the cell (i, j)
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+*/
+var uniquePaths = function (m, n) {
+  let dp = Array(m)
+    .fill(0)
+    .map(() => Array(n).fill(0));
+  for (let i = 0; i < m; i++) {
+    dp[i][0] = 1;
+  }
+  for (let j = 0; j < n; j++) {
+    dp[0][j] = 1;
+  }
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    }
+  }
+  return dp[m - 1][n - 1];
+};
