@@ -27,5 +27,25 @@ class Solution:
                     del cnt[char]
             else:
                 return False
-        return not cnt
+        return not cnt  # cnt should be an empty dict if same length
+    
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        cnt = dict()
+        for char in s:
+            if char in cnt:
+                cnt[char] += 1
+            else:
+                cnt[char] = 1
+        for char in t:
+            if char in cnt:
+                if cnt[char] == 0:
+                    return False
+                cnt[char] -= 1
+            else:
+                return False
+        return True
             
