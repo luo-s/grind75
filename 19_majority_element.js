@@ -9,6 +9,8 @@ n == nums.length
 -10^9 <= nums[i] <= 10^9
 */
 
+// https://leetcode.com/problems/majority-element
+
 // hash table
 // time complexity O(n)
 // space complexity O(n)
