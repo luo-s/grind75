@@ -10,6 +10,7 @@
 # https://leetcode.com/problems/valid-parentheses/description/
 
 # stack FILO solution
+# time complexity: O(n)
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
