@@ -9,7 +9,11 @@
 
 # https://leetcode.com/problems/k-closest-points-to-origin/
 
-# heap sort
+#priority queue
+# python built-in module: heapq https://docs.python.org/3/library/heapq.html
+# heapq.heapify(list) (turn list into a heap)
+# heapq.heappush(heap, item)
+# heapq.heappop(heap) (always pop the smallest element)
 import heapq
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
