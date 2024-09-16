@@ -16,6 +16,7 @@
 
 # https://leetcode.com/problems/rotting-oranges/
 
+# BFS
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         import collections
