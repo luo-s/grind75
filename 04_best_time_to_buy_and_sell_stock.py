@@ -7,7 +7,8 @@
 # Return the maximum profit you can achieve from this transaction. 
 # If you cannot achieve any profit, return 0.
 
-# https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+# https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+# advanced LC 53 Maximum Subarray https://leetcode.com/problems/maximum-subarray/
 
 # brute force solution
 # time complexity: O(n^2)
@@ -36,8 +37,8 @@ class Solution:
 # time complexity: O(n)
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        max_profit, min_price = 0, float('inf')
+        max_profit, cur_min = 0, float('inf')
         for price in prices:
-            min_price = min(min_price, price)
-            max_profit = max(max_profit, price - min_price)
+            cur_min = min(cur_min, price)
+            max_profit = max(max_profit, price - cur_min)
         return max_profit

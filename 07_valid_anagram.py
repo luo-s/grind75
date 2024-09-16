@@ -14,38 +14,17 @@
 # space complexity: O(n)
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t): return False
         cnt = dict()
         for char in s:
-            if char in cnt:
-                cnt[char] += 1
-            else:
-                cnt[char] = 1
+            cnt[char] = cnt.get(char, 0) + 1
         for char in t:
-            if char in cnt:
-                cnt[char] -= 1
-                if cnt[char] == 0:
-                    del cnt[char]
-            else:
+            if char not in cnt:
                 return False
-        return not cnt  # cnt should be an empty dict if same length
+            if cnt[char] == 0:
+                return False
+            cnt[char] -= 1
+        return True
     
 
-class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        cnt = dict()
-        for char in s:
-            if char in cnt:
-                cnt[char] += 1
-            else:
-                cnt[char] = 1
-        for char in t:
-            if char in cnt:
-                if cnt[char] == 0:
-                    return False
-                cnt[char] -= 1
-            else:
-                return False
-        return True
             

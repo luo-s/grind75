@@ -9,19 +9,14 @@
 # hash-map solution
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        if len(ransomNote) > len(magazine): return False
         cnt = dict()
         for char in magazine:
-            if char in cnt:
-                cnt[char] += 1
-            else:
-                cnt[char] = 1
+            cnt[char] = cnt.get(char, 0) + 1
         for char in ransomNote:
-            if char in cnt:
-                if cnt[char] == 0:
-                    return False
-                cnt[char] -= 1
-            else:
-                return False
+            if char not in cnt: return False
+            if cnt[char] == 0: return False
+            cnt[char] -= 1
         return True
     
 # built-in count method

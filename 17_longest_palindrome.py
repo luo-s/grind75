@@ -9,28 +9,28 @@
 
 # https://leetcode.com/problems/longest-palindrome
 
-# set() 
+# set() and .count()
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        odd_present, cnt = 0, 0
+        odd_present, ans = False, 0
         for i in set(s):
             c = s.count(i)
             if c % 2 == 0:
-                cnt += c
+                ans += c
             else:
-                odd_present = 1
-                cnt += (c-1)
-        return cnt if not odd_present else cnt + 1
+                odd_present = True
+                ans += (c - 1)
+        return ans + 1 if odd_present else ans
 
 # dict()
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        ans, cnt, odd_present = 0, dict(), 0
+        ans, cnt, odd_present = 0, dict(), False
         for char in s:
             cnt[char] = cnt.get(char, 0) + 1
         for ele in cnt:
-            ans += (cnt[ele]-1 if cnt[ele] % 2 else cnt[ele])
+            ans += cnt[ele] - 1 if cnt[ele] % 2 else cnt[ele]
             if cnt[ele] % 2:
-                odd_present = 1
+                odd_present = True
         return ans + 1 if odd_present else ans
     

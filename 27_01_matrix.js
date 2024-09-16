@@ -12,6 +12,8 @@ mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 */
 
+// https://leetcode.com/problems/01-matrix/
+
 // brute force -- time limit exceeded
 // time complexity: O(m*n)^2
 // if mat[i][j] === 0, then distance is 0, doing nothing
