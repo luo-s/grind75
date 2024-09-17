@@ -9,7 +9,8 @@
 # The test cases are generated such that the number of unique combinations 
 # that sum up to target is less than 150 combinations for the given input.
 
-# https://leetcode.com/problems/combination-sum/description/
+# https://leetcode.com/problems/combination-sum/
+# advanced LC 40 https://leetcode.com/problems/combination-sum-ii/
 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
