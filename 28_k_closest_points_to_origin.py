@@ -9,7 +9,7 @@
 
 # https://leetcode.com/problems/k-closest-points-to-origin/
 
-#priority queue
+# priority queue
 # python built-in module: heapq https://docs.python.org/3/library/heapq.html
 # heapq.heapify(list) (turn list into a heap)
 # heapq.heappush(heap, item)
